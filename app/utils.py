@@ -5,14 +5,23 @@ import logging
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+# Get the directory of the current file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Go up one level to the project root
+project_root = os.path.dirname(current_dir)
+# Define data folder relative to project root
+DATA_FOLDER = os.path.join(project_root, "data")
 
-DATA_FOLDER = "data"
-
-
+# Or simply for debugging:
 def get_all_companies():
-    companies = [f.replace(".csv", "") for f in os.listdir(DATA_FOLDER) if f.endswith(".csv")]
-    logger.info(f"Found companies: {companies}")
-    return companies
+    try:
+        files = os.listdir(DATA_FOLDER)
+        print(f"Current directory: {os.getcwd()}")
+        print(f"Files found: {files}")
+        return [f.replace(".csv", "") for f in files if f.endswith(".csv")]
+    except Exception as e:
+        print(f"Error listing directory: {str(e)}")
+        return []
 
 
 def load_questions(company):
