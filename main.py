@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from app.routes import router
-import os
 
 app = FastAPI(
     title="DSA Interview API",
@@ -10,6 +9,5 @@ app = FastAPI(
 
 app.include_router(router)
 
-# For Vercel serverless function
-# The handler function will be called when your serverless function is invoked
-handler = app  # This exports the FastAPI app as a handler that Vercel can use
+# This is the critical part - make sure this exact format is used
+handler = app
