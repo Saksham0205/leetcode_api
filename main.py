@@ -12,4 +12,4 @@ app.include_router(router)
 
 # For Vercel serverless function
 # The handler function will be called when your serverless function is invoked
-# This exports the FastAPI app as a handler that Vercel can use
+handler = app  # This exports the FastAPI app as a handler that Vercel can use
