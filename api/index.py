@@ -33,20 +33,27 @@ app.include_router(router)
 logger.info("Routes included in FastAPI app")
 
 # Initialize Mangum handler
-mangum_handler = Mangum(app, lifespan="auto")
-logger.info("Mangum handler initialized")
+try:
+    mangum_handler = Mangum(app, lifespan="auto")
+    logger.info("Mangum handler initialized")
+except Exception as e:
+    logger.error(f"Failed to initialize Mangum handler: {str(e)}")
+    raise
 
-# Vercel handler
+# Explicit Lambda handler
 def handler(event, context):
-    logger.info(f"Handler invoked with event: {event}")
+    logger.info(f"Lambda handler invoked with event: {event}")
     try:
         response = mangum_handler(event, context)
-        logger.info(f"Handler response: {response}")
+        logger.info(f"Lambda handler response: {response}")
         return response
     except Exception as e:
-        logger.error(f"Handler error: {str(e)}")
+        logger.error(f"Lambda handler error: {str(e)}")
         return {
             "statusCode": 500,
             "body": f"Internal server error: {str(e)}",
-            "headers": {"Content-Type": "text/plain"}
+            "headers": {
+                "Content-Type": "text/plain",
+                "Access-Control-Allow-Origin": "*"
+            }
         }
