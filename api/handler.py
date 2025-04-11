@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from mangum import Mangum
 from app.routes import router
 
 # Initialize FastAPI app
@@ -12,5 +11,5 @@ app = FastAPI(
 # Include routes
 app.include_router(router)
 
-# Initialize Mangum handler with proper configuration for Vercel
-handler = Mangum(app, lifespan="off")
+# Export the FastAPI app directly as the handler
+handler = app
