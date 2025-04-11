@@ -1,11 +1,11 @@
 {
   "version": 2,
   "builds": [{
-    "src": "api/handler.py",
+    "src": "index.py",
     "use": "@vercel/python"
   }],
   "routes": [{
     "src": "/(.*)",
-    "dest": "api/handler.py"
+    "dest": "index.py"
   }]
 }

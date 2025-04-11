@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from app.routes import router
-from mangum import Mangum
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -11,6 +10,3 @@ app = FastAPI(
 
 # Include routes
 app.include_router(router)
-
-# Create handler for AWS Lambda
-handler = Mangum(app)
