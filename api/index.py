@@ -11,7 +11,9 @@ logger = logging.getLogger(__name__)
 
 # Add project root to sys.path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, project_root)
+if project_root not in sys.path:
+    sys.path.append(project_root)
+logger.info(f"Added project root to sys.path: {project_root}")
 
 # Import routes
 try:

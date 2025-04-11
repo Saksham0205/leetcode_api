@@ -7,8 +7,8 @@ from functools import lru_cache
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Define data folder relative to project root
-DATA_FOLDER = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
+# Define data folder relative to current file
+DATA_FOLDER = os.path.join(os.path.dirname(__file__), "..", "data")
 
 @lru_cache(maxsize=100)
 def get_all_companies():
