@@ -1,4 +1,5 @@
 from api.handler import app
+from mangum import Mangum
 
-# This is the entry point for Vercel
-handler = app
+# Create handler for AWS Lambda / Vercel
+handler = Mangum(app)
