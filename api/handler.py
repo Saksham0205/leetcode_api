@@ -12,5 +12,5 @@ app = FastAPI(
 # Include routes
 app.include_router(router)
 
-# Initialize Mangum handler
-handler = Mangum(app)
+# Initialize Mangum handler with proper configuration for Vercel
+handler = Mangum(app, lifespan="off")
