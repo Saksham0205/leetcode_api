@@ -96,9 +96,35 @@ function searchQuestions(questions, searchTerm) {
   });
 }
 
+function paginateResults(questions, page = 1, limit = 20) {
+  // Convert to numbers and set defaults
+  const pageNum = Math.max(1, parseInt(page) || 1);
+  const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 20)); // Max 100 items per page
+  
+  const totalItems = questions.length;
+  const totalPages = Math.ceil(totalItems / limitNum);
+  const startIndex = (pageNum - 1) * limitNum;
+  const endIndex = startIndex + limitNum;
+  
+  const paginatedData = questions.slice(startIndex, endIndex);
+  
+  return {
+    data: paginatedData,
+    pagination: {
+      current_page: pageNum,
+      per_page: limitNum,
+      total_items: totalItems,
+      total_pages: totalPages,
+      has_next: pageNum < totalPages,
+      has_prev: pageNum > 1
+    }
+  };
+}
+
 module.exports = {
   getAllCompanies,
   loadQuestions,
   filterByDifficulty,
-  searchQuestions
+  searchQuestions,
+  paginateResults
 };
