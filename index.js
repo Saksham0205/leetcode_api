@@ -14,8 +14,13 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json({
     title: 'DSA Interview API',
-    description: 'Fetch DSA questions by company and difficulty',
-    version: '1.0'
+    description: 'Fetch DSA questions by company, difficulty, and search terms',
+    version: '1.0',
+    endpoints: {
+      '/companies': 'GET - List all companies',
+      '/questions': 'GET - Get questions (params: company, difficulty?, search?)',
+      '/questions/all': 'GET - Get all questions (params: difficulty?, search?)'
+    }
   });
 });
 

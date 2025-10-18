@@ -80,8 +80,25 @@ function filterByDifficulty(questions, difficulty) {
   return questions.filter(q => q.difficulty.toLowerCase() === difficulty.toLowerCase());
 }
 
+function searchQuestions(questions, searchTerm) {
+  if (!searchTerm) return questions;
+  
+  const searchLower = searchTerm.toLowerCase();
+  
+  return questions.filter(q => {
+    // Search in title
+    const titleMatch = q.title.toLowerCase().includes(searchLower);
+    
+    // Search in topics
+    const topicsMatch = q.topics.toLowerCase().includes(searchLower);
+    
+    return titleMatch || topicsMatch;
+  });
+}
+
 module.exports = {
   getAllCompanies,
   loadQuestions,
-  filterByDifficulty
+  filterByDifficulty,
+  searchQuestions
 };
